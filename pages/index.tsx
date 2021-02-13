@@ -1,28 +1,26 @@
-import React from 'react';
-import Checkbox from "../components/_reusables/Checkbox";
-import styled from "styled-components";
+import * as React from "react"
+import {useDispatch} from "react-redux";
+import {init} from "../redux/actions/indexActions";
+import {getData} from "../utils/getData";
+import IndexPage from "../components/IndexPage/IndexPage";
 
-const Test3Route = ( props ) => {
+const Index = ({response}) => {
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(init(response[0]))
+  }, [])
+
   return (
-    <Test>
-      fdfdfsdfsdfs
-    </Test>
+    <IndexPage />
   );
 };
 
-const Test = styled.div`
-  transition: 1s;
-`
+Index.getInitialProps = async () => {
+  let response = await getData()
 
-// export async function getStaticProps(context) {
-//   const res = await fetch(`http://130.193.62.187/wp-json/rest/v1/menus/header_bottom_menu/`)
-//   const data = await res.json()
-//   return {
-//     props: { data }, // will be passed to the page component as props
-//   }
-// }
+  return {response}
+}
 
 
-// http://130.193.62.187/wp-json/rest/v1/menus/header_bottom_menu/
-
-export default Test3Route;
+export default Index;

@@ -1,10 +1,12 @@
 import { useMemo } from "react";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import indexReducer from "./reducers/indexReducer";
 
 let store
 
 export const rootReducer = combineReducers({
+    index: indexReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>
